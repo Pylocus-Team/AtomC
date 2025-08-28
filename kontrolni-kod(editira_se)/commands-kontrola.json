@@ -1,0 +1,100 @@
+{
+  "shout:": {
+    "description": "Prints a message to the output terminal.",
+    "syntax": "shout: \"text\"",
+    "args": ["string"],
+    "example": "shout: \"HELLO\"",
+    "error": "GREŠKA. (tip 01) – shout: expects one string in quotes"
+  },
+  "probe:": {
+    "description": "Asks user for input and stores it in a variable.",
+    "syntax": "probe: \"Question\" >> @varname",
+    "args": ["string", ">>", "variable"],
+    "example": "probe: \"Enter name\" >> @ime",
+    "error": "GREŠKA. (tip 02) – probe: requires >> and variable"
+  },
+  "set@": {
+    "description": "Sets a variable to a specific value.",
+    "syntax": "set@ var := value",
+    "args": ["variable", ":=", "value"],
+    "example": "set@ broj := 7",
+    "error": "GREŠKA. (tip 03) – set@ missing := or invalid format"
+  },
+  "do:": {
+    "description": "Evaluates an expression and stores it in a variable.",
+    "syntax": "do: @var = expression",
+    "args": ["@variable", "=", "expression"],
+    "example": "do: @z = 5 + 3 * 2",
+    "error": "GREŠKA. (tip 04) – do: requires @var = expression"
+  },
+  "test:": {
+    "description": "Evaluates a condition and executes block if true.",
+    "syntax": "test: condition { ... }",
+    "args": ["condition", "block"],
+    "example": "test: broj > 5 { shout: \"ok\" }",
+    "error": "GREŠKA. (tip 06) – test: requires condition and block"
+  },
+  "loop#": {
+    "description": "Repeats a block of code N times.",
+    "syntax": "loop# Nx { ... }",
+    "args": ["integer", "x", "block"],
+    "example": "loop# 3x { shout: \"again\" }",
+    "error": "GREŠKA. (tip 07) – loop# requires integer and block"
+  },
+  "wait::": {
+    "description": "Waits for a specified amount of seconds.",
+    "syntax": "wait:: time",
+    "args": ["float_or_int"],
+    "example": "wait:: 1.5",
+    "error": "GREŠKA. (tip 08) – wait:: expects time in seconds"
+  },
+  "echo!": {
+    "description": "Outputs the value of a variable.",
+    "syntax": "echo! @varname",
+    "args": ["variable"],
+    "example": "echo! @ime",
+    "error": "GREŠKA. (tip 09) – echo! requires a valid variable"
+  },
+  "trash@": {
+    "description": "Deletes a variable from memory.",
+    "syntax": "trash@ @varname",
+    "args": ["variable"],
+    "example": "trash@ @temp",
+    "error": "GREŠKA. (tip 10) – trash@ expects valid variable"
+  },
+  "cut>": {
+    "description": "Terminates the program.",
+    "syntax": "cut>",
+    "args": [],
+    "example": "cut>",
+    "error": "GREŠKA. (tip 11) – cut> takes no arguments"
+  },
+  "purge!": {
+    "description": "Clears the terminal output.",
+    "syntax": "purge!",
+    "args": [],
+    "example": "purge!",
+    "error": "GREŠKA. (tip 12) – purge! takes no arguments"
+  },
+  "bind:": {
+    "description": "Defines a reusable block of code.",
+    "syntax": "bind: blockName { ... }",
+    "args": ["identifier", "block"],
+    "example": "bind: loginBlock { shout: \"log in\" }",
+    "error": "GREŠKA. (tip 13) – bind: requires name and block"
+  },
+  "call:": {
+    "description": "Calls a previously defined block.",
+    "syntax": "call: blockName",
+    "args": ["identifier"],
+    "example": "call: loginBlock",
+    "error": "GREŠKA. (tip 14) – call: requires block name"
+  },
+  "fail!": {
+    "description": "Forces program crash with a custom error message.",
+    "syntax": "fail! \"message\"",
+    "args": ["string"],
+    "example": "fail! \"Something went wrong\"",
+    "error": "GREŠKA. (tip 15) – fail! expects message in quotes"
+  }
+}
