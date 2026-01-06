@@ -1,0 +1,1 @@
+# RYNX Error Codes
