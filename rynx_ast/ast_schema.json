@@ -1,0 +1,67 @@
+{
+  "engine_version": "2.0.0",
+  "nodes": {
+    "Program": {
+      "fields": {
+        "tasks": "List<TaskDecl>",
+        "start_block": "StartNode"
+      }
+    },
+    "StartNode": {
+      "fields": {
+        "statements": "List<Statement>",
+        "exit_statement": "EndNode"
+      }
+    },
+    "TaskDecl": {
+      "fields": {
+        "name": "String",
+        "params": "List<Param>",
+        "return_type": "TypeNode",
+        "body": "BlockNode"
+      }
+    },
+    "VariableDecl": {
+      "fields": {
+        "name": "String",
+        "type": "TypeNode",
+        "expression": "ExprNode",
+        "modifier": "String",
+        "is_inferred": "Boolean"
+      }
+    },
+    "WhenStmt": {
+      "fields": {
+        "condition": "ExprNode",
+        "then_branch": "BlockNode",
+        "else_branch": "Optional<Node>"
+      }
+    },
+    "LoopStmt": {
+      "fields": {
+        "variant": "String",
+        "iterator": "Optional<String>",
+        "range_expr": "Optional<RangeNode>",
+        "body": "BlockNode"
+      }
+    },
+    "BinaryExpr": {
+      "fields": {
+        "left": "ExprNode",
+        "operator": "String",
+        "right": "ExprNode"
+      }
+    },
+    "Literal": {
+      "fields": {
+        "value": "Any",
+        "raw_type": "String"
+      }
+    },
+    "EndNode": {
+      "fields": {
+        "code": "Integer"
+      }
+    }
+  }
+}
