@@ -1,0 +1,94 @@
+{
+  "RX101": {
+    "name": "SyntaxError",
+    "message_template": "Invalid syntax"
+  },
+  "RX102": {
+    "name": "UnexpectedToken",
+    "message_template": "Unexpected token"
+  },
+  "RX103": {
+    "name": "MissingBrace",
+    "message_template": "Missing brace"
+  },
+  "RX104": {
+    "name": "InvalidCharacter",
+    "message_template": "Invalid character"
+  },
+  "RX105": {
+    "name": "InvalidLiteral",
+    "message_template": "Invalid literal"
+  },
+  "RX201": {
+    "name": "TypeMismatchError",
+    "message_template": "Type mismatch"
+  },
+  "RX202": {
+    "name": "InvalidOperator",
+    "message_template": "Invalid operator"
+  },
+  "RX203": {
+    "name": "MissingReturn",
+    "message_template": "Missing return"
+  },
+  "RX204": {
+    "name": "UndefinedVariable",
+    "message_template": "Undefined variable"
+  },
+  "RX205": {
+    "name": "InvalidTaskCall",
+    "message_template": "Invalid task call"
+  },
+  "RX206": {
+    "name": "InvalidCondition",
+    "message_template": "Condition must be yes"
+  },
+  "RX207": {
+    "name": "InvalidBreak",
+    "message_template": "break only allowed inside loop"
+  },
+  "RX208": {
+    "name": "Redeclaration",
+    "message_template": "Redeclaration in same scope"
+  },
+  "RX209": {
+    "name": "EmptyTaskBody",
+    "message_template": "Task body cannot be empty"
+  },
+  "RX210": {
+    "name": "InvalidEndValue",
+    "message_template": "end must be 0 or 1"
+  },
+  "RX211": {
+    "name": "MissingStartBlock",
+    "message_template": "Exactly one start block required"
+  },
+  "RX212": {
+    "name": "ShowRequiresArg",
+    "message_template": "show requires at least one argument"
+  },
+  "RX213": {
+    "name": "ExecutionBlockMissing",
+    "message_template": "Execution block missing"
+  },
+  "RX501": {
+    "name": "IndexOutOfBounds",
+    "message_template": "Index out of bounds"
+  },
+  "RX502": {
+    "name": "DivisionByZero",
+    "message_template": "Division by zero"
+  },
+  "RX503": {
+    "name": "StackOverflow",
+    "message_template": "Stack overflow"
+  },
+  "RX504": {
+    "name": "InputParseFail",
+    "message_template": "Input parse failed"
+  },
+  "RX505": {
+    "name": "MemoryLimitExceeded",
+    "message_template": "Memory limit exceeded"
+  }
+}

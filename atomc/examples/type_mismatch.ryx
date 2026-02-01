@@ -1,4 +1,5 @@
 start {
     num x = "hi";
-    end 0;
+     end 0;
 }
+

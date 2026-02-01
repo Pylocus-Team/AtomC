@@ -1,0 +1,79 @@
+(* Rynx 2.0 EBNF — Single source of truth for syntax *)
+
+program     = task_decl* , "start" , block ;
+block       = "{" , statement* , "}" ;
+statement   = variable_decl | assignment | show_stmt | when_stmt
+            | loop_stmt | each_stmt | match_stmt | flow_stmt
+            | "break" , ";" | "return" , expression , ";"
+            | expression , ";" ;
+
+variable_decl = type , identifier , "=" , expression , ";"
+              | "guess" , identifier , "=" , input_func , ";"
+              | "let" , type , identifier , "=" , expression , ";" ;
+
+type        = "num" | "dec" | "text" | "yes"
+            | "nums" | "texts" | "decs" | "yess" ;
+
+show_stmt   = "show" , expression , ( "," , expression )* , ";" ;
+
+when_stmt   = "when" , expression , block
+            | "when" , expression , block , "else" , block
+            | "when" , expression , block , "else" , when_stmt ;
+
+loop_stmt   = "loop" , identifier , "thru" , range_expr , block
+            | "loop" , identifier , "thru" , identifier , block
+            | "loop" , block ;
+
+each_stmt   = "each" , identifier , "in" , identifier , block ;
+
+match_stmt  = "match" , expression , "{" , match_case* , ( "else" , ":" , block )? , "}" ;
+match_case  = "case" , expression , ":" , block ;
+
+flow_stmt   = "flow" , "{" , flow_case+ , "}" ;
+flow_case   = "when" , expression , ":" , block
+            | "else" , ":" , block ;
+
+task_decl   = "task" , identifier , "(" , param_list? , ")" , block ;
+param_list  = param , ( "," , param )* ;
+param       = type , identifier ;
+
+assignment  = identifier , "=" , expression , ";" ;
+
+(* Expressions — precedence: logical < comparison < term < factor < unary < primary *)
+expression  = logical_or ;
+logical_or  = logical_and , ( "||" , logical_and )* ;
+logical_and = comparison , ( "&&" , comparison )* ;
+comparison  = term , ( ( "<" | ">" | "<=" | ">=" | "==" | "!=" ) , term )* ;
+term        = factor , ( ( "+" | "-" ) , factor )* ;
+factor      = unary , ( ( "*" | "/" | "%" ) , unary )* ;
+unary       = ( "!" | "-" ) , unary | primary ;
+primary     = number | string_literal | "true" | "false"
+            | identifier | input_func | builtin_func
+            | range_expr | list_access | "(" , expression , ")"
+            | "block" , block ;
+
+range_expr  = expression , ".." , expression
+            | expression , ".." , expression , "step" , expression ;
+list_access = identifier , "[" , expression , "]" ;
+
+input_func  = "input_text" , "()" | "input_num" , "()"
+            | "input_dec" , "()" | "input_yes" , "()" ;
+
+builtin_func = "len" , "(" , expression , ")"
+             | "split" , "(" , expression , ")"
+             | "join" , "(" , expression , ")"
+             | "round" , "(" , expression , ")"
+             | "max" , "(" , expression , ( "," , expression )* , ")"
+             | "min" , "(" , expression , ( "," , expression )* , ")"
+             | "rand" , "()" ;
+
+number      = [ "-" ] , digit+ , [ "." , digit+ ] ;
+string_literal = '"' , ( escaped_char | ~('"' | '\\') )* , '"' ;
+escaped_char = '\\' , ( '"' | '\\' | 'n' | 't' ) ;
+
+identifier  = letter , ( letter | digit | "_" )* ;
+letter      = "a".."z" | "A".."Z" ;
+digit       = "0".."9" ;
+
+comment     = "//" , ~('\n')* | "/*" , ( comment | ~('*') | "*" , ~('/') )* , "*/" ;
+whitespace  = " " | "\t" | "\n" | "\r" ;

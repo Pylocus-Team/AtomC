@@ -1,0 +1,16 @@
+task fakt(num n) {
+    when n <= 1 {
+        1;
+    } else {
+        n * fakt(n - 1);
+    }
+}
+
+start {
+    num maxn = 5;
+    show "Factorials:";
+    loop i thru 1..maxn {
+        show i, "! = ", fakt(i);
+    }
+    end 0;
+}
