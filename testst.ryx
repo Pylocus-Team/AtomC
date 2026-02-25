@@ -1,0 +1,73 @@
+// Rynx 2.0 Complex Stres-Test Program (Validno za AtomC)
+
+task fakt(num n) {
+    when n <= 1 { 1; }
+    else { n * fakt(n - 1); }
+}
+
+task sum_list(nums lista) {
+    num total = 0;
+    each x in lista {
+        total = total + x;
+    }
+    total;
+}
+
+task filter_parni(nums lista) {
+    nums out = split(""); // prazna nums lista
+    each x in lista {
+        when x % 2 == 0 { out = out + [x]; }
+    }
+    out;
+}
+
+task process_text(text line) {
+    texts words = split(line);
+    texts filtered = split(""); // prazna texts lista
+    each w in words {
+        when len(w) > 3 { filtered = filtered + [w]; }
+    }
+    join(filtered);
+}
+
+task analyze(nums numbers, texts words) {
+    show "Numbers: ", numbers;
+    show "Sum: ", sum_list(numbers);
+    show "Even numbers: ", filter_parni(numbers);
+
+    num max_val = max(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
+    num min_val = min(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
+    show "Max: ", max_val, " | Min: ", min_val;
+
+    show "Processed text: ", process_text(join(words));
+}
+
+start {
+    show "=== Welcome to Rynx Processor ===";
+
+    nums numbers = split(""); // prazna lista
+    loop i thru 1..5 {
+        num val = input_num();
+        numbers = numbers + [val];
+    }
+
+    show "Enter a line of text:";
+    text input_line = input_text();
+    texts words = split(input_line);
+
+    analyze(numbers, words);
+
+    flow {
+        when len(words) > 5: show "You typed a lot of words!";
+        when len(numbers) > 3: show "You entered many numbers!";
+        else: show "Processing finished.";
+    }
+
+    match rand() {
+        case 0..25: show "Random low!";
+        case 26..75: show "Random medium!";
+        else: show "Random high!";
+    }
+
+    end 0;
+}
